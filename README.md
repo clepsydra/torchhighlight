@@ -14,7 +14,7 @@ _The Web Page_:
 A very small Angular based page which reads the current position from the smartphone and transfers it.
 
 
-To run the application:
+## To run the application:
 run npm install for the Web application.
 Then build it for production using 
 ng build --prod
