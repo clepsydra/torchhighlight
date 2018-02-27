@@ -1,0 +1,49 @@
+﻿<Window x:Class="TorchlightWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TorchlightWindow"
+        mc:Ignorable="d" FontSize="16"
+        Title="MainWindow" Height="350" Width="525"
+        WindowState="Maximized"
+        AllowsTransparency="True"
+        Topmost="True"
+        WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="White"/>
+    </Window.Background>
+    <Window.Resources>
+        <local:VisibilityConverter x:Key="visibilityConverter"  />
+    </Window.Resources>
+    <Grid>
+        <Path Fill="Black" Opacity="0.2"
+              Visibility="{Binding IsDimm, Converter={StaticResource visibilityConverter}}">
+            <Path.Data>
+                <CombinedGeometry GeometryCombineMode="Exclude">
+                    <CombinedGeometry.Geometry1>
+                        <RectangleGeometry Rect="0,0,5000,5000"/>
+                    </CombinedGeometry.Geometry1>
+                    <CombinedGeometry.Geometry2>
+                        <EllipseGeometry RadiusX="150" RadiusY="150" Center="{Binding Center}"/>
+                    </CombinedGeometry.Geometry2>
+                </CombinedGeometry>
+            </Path.Data>
+        </Path>
+        <Path Fill="Yellow" Opacity="0.2"
+              Visibility="{Binding IsDimm, Converter={StaticResource visibilityConverter}}">
+            <Path.Data>
+                <EllipseGeometry RadiusX="150" RadiusY="150" Center="{Binding Center}"/>
+                
+            </Path.Data>
+        </Path>
+
+        <StackPanel Visibility="{Binding IsShowQR, Converter={StaticResource visibilityConverter}}" 
+                    VerticalAlignment="Center" HorizontalAlignment="Center" Background="White">
+            <TextBlock Text="Scan code with your smartphone and open the url:" FontSize="30"/>
+            <TextBlock Text="{Binding Url}" FontSize="30"/>
+            <Image Source="{Binding QRCode}" Height="300" Width="300"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

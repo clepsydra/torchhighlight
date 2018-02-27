@@ -1,0 +1,7 @@
+.wideButton{
+    font-size: 100px;
+    width: calc(100vw - 40px);
+    margin: 5px;
+    padding: 5px;
+    height: calc(50vh - 40px);
+}
