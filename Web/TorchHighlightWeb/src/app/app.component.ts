@@ -49,6 +49,8 @@ export class AppComponent implements OnInit{
   leftToRight: number;
   frontToBack: number;
 
+  lastSent = Date.now();
+
   handleOrientationEvent (_this: AppComponent, event){
     // alpha: rotation around z-axis
     _this.rotateDegrees = event.alpha;
@@ -60,17 +62,23 @@ export class AppComponent implements OnInit{
     // beta: front back motion
     _this.frontToBack = event.beta;
 
-
-    _this.positionService.sendRotate(event.alpha - _this.rotate0);
+    if (_this.isOn || (Date.now() - this.lastSent) > 1000){
+      _this.positionService.sendRotate(event.alpha - _this.rotate0);
+      this.lastSent = Date.now();
+    }
   }
 
+  isOn = true;
+
   turnOn(){
+    this.isOn = true;
     this.positionService.sendDimm(true);
     this.center();
   }
 
   turnOff(){
     this.positionService.sendDimm(false);
+    this.isOn = false;
   }
 
   center(){
