@@ -35,14 +35,14 @@ namespace TorchlightWindow
 
             string machineName = Environment.MachineName;
             int port = Utils.FindAvailablePort();
-            string url = $"http://{machineName}:{port}/";
-            this.Url = url + "index.html";
+            string listeningUrl = $"http://{machineName}:{port}/";
+            this.Url = listeningUrl + "index.html";
 
-            Thread thread = new Thread(() => this.RunListener(url));
+            Thread thread = new Thread(() => this.RunListener(listeningUrl));
             thread.Start();
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(this.Url, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
 

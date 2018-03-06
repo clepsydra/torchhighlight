@@ -13,27 +13,29 @@ export class PositionService {
   constructor(private httpClient: HttpClient) {
   }
 
-  isSending = false;
+  isSendingY = false;
 
   async sendY(y: number) {
-    if (this.isSending){
+    if (this.isSendingY){
       return;
     }
-    this.isSending = true
+    this.isSendingY = true
     let url = this.baseUri + `?y=${y}`
     try
     {
       await this.httpClient.post(url, null).toPromise();
     }
     catch {}
-    this.isSending = false;
+    this.isSendingY = false;
   }
 
+  isSendingRotate = false;
+
   async sendRotate(rotate: number) {
-    if (this.isSending){
+    if (this.isSendingRotate){
       return;
     }
-    this.isSending = true
+    this.isSendingRotate = true
 
     let url = this.baseUri + `?rotate=${rotate}`
     try
@@ -42,7 +44,7 @@ export class PositionService {
     }
     catch {}
 
-    this.isSending = false;
+    this.isSendingRotate = false;
   }
 
   async sendDimm(dimmValue: boolean) {
