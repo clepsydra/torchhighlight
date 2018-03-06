@@ -19,6 +19,8 @@ run npm install for the Web application.
 Then build it for production using 
 ng build --prod
 
+Copy the dist folder underneath the output folder of the Wpf application - it will be served from there.
+
 Compile and run the Wpf application.
 
 Scan the QR code on the screen using a smartphone and open the web page.
