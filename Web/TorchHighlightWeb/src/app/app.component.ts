@@ -40,7 +40,10 @@ export class AppComponent implements OnInit{
     _this.y = event.accelerationIncludingGravity.y;
     _this.z = event.accelerationIncludingGravity.z;
 
-    _this.positionService.sendY(event.accelerationIncludingGravity.y - _this.y0);
+    if (_this.isOn || (Date.now() - this.lastSent) > 1000){
+      _this.positionService.sendY(event.accelerationIncludingGravity.y - _this.y0);
+      this.lastSent = Date.now();
+    }
 
     
   }

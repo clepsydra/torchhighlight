@@ -21,7 +21,11 @@ export class PositionService {
     }
     this.isSending = true
     let url = this.baseUri + `?y=${y}`
-    await this.httpClient.post(url, null).toPromise();
+    try
+    {
+      await this.httpClient.post(url, null).toPromise();
+    }
+    catch {}
     this.isSending = false;
   }
 
@@ -32,21 +36,25 @@ export class PositionService {
     this.isSending = true
 
     let url = this.baseUri + `?rotate=${rotate}`
-    await this.httpClient.post(url, null).toPromise();
+    try
+    {
+      await this.httpClient.post(url, null).toPromise();
+    }
+    catch {}
 
     this.isSending = false;
   }
 
   async sendDimm(dimmValue: boolean) {
-    if (this.isSending){
-      return;
-    }
-    this.isSending = true
+    
 
     let url = this.baseUri + `?dimm=${dimmValue}`
-    await this.httpClient.post(url, null).toPromise();
+    try
+    {
+      await this.httpClient.post(url, null).toPromise();
+    }
+    catch {}
 
-    this.isSending = false;
   }
 
 }

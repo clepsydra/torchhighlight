@@ -42,5 +42,11 @@ namespace TorchlightWindow
             this.viewModel = new ViewModel();
             this.DataContext = this.viewModel;
         }
+
+        private void CloseClicked(object sender, RoutedEventArgs e)
+        {
+            this.viewModel.Dispose();
+            this.Close();
+        }
     }
 }

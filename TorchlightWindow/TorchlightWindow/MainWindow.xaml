@@ -9,7 +9,9 @@
         WindowState="Maximized"
         AllowsTransparency="True"
         Topmost="True"
-        WindowStyle="None">
+        WindowStyle="None"
+        >
+    
     <Window.Background>
         <SolidColorBrush Opacity="0" Color="White"/>
     </Window.Background>
@@ -43,7 +45,7 @@
             <TextBlock Text="Scan code with your smartphone and open the url:" FontSize="30"/>
             <TextBlock Text="{Binding Url}" FontSize="30"/>
             <Image Source="{Binding QRCode}" Height="300" Width="300"/>
-
+            <Button Click="CloseClicked" FontSize="16">Close</Button>
         </StackPanel>
     </Grid>
 </Window>

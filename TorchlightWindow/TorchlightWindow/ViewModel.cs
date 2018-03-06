@@ -11,6 +11,7 @@ namespace TorchlightWindow
     using System.Globalization;
     using System.IO;
     using System.Net;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Threading;
     using System.Windows;
@@ -35,13 +36,13 @@ namespace TorchlightWindow
             string machineName = Environment.MachineName;
             int port = Utils.FindAvailablePort();
             string url = $"http://{machineName}:{port}/";
-            this.Url = url;
+            this.Url = url + "index.html";
 
             Thread thread = new Thread(() => this.RunListener(url));
             thread.Start();
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(url + "index.html", QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
@@ -216,7 +217,7 @@ namespace TorchlightWindow
 
             this.listener.Start();
 
-            while (this.listener.IsListening)
+          while (this.listener.IsListening)
             {
                 try
                 {
@@ -249,7 +250,8 @@ namespace TorchlightWindow
                     }
                     else if (context.Request.HttpMethod == "GET")
                     {
-                        string basePath = @"C:\Source\Projects\TorchHighlight\Web\TorchHighlightWeb\dist";
+                        string basePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "dist");
+                        //string basePath = @"C:\Source\Projects\TorchHighlight\Web\TorchHighlightWeb\dist";
                         string fileName = Path.Combine(basePath, context.Request.Url.AbsolutePath.Substring(1));
                         if (File.Exists(fileName))
                         {
