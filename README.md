@@ -25,4 +25,5 @@ Compile and run the Wpf application.
 
 Scan the QR code on the screen using a smartphone and open the web page.
 Point your smartphone to the screen and hit the "On" button on the web page.
-That yould make a yellow circle show up and the QR code goes away.
+That should make a yellow circle show up and the QR code goes away.
+Wave your phone and see the circle moving.
