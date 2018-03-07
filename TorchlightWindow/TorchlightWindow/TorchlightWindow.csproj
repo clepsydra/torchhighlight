@@ -103,4 +103,9 @@
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rmdir dist
+mkdir dist
+xcopy /Y $(SolutionDir)..\Web\TorchHighlightWeb\dist  dist</PostBuildEvent>
+  </PropertyGroup>
 </Project>
